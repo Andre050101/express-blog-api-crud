@@ -3,21 +3,21 @@ const router = express.Router(); //Creazione router
 const { index, show, store, update, modify, destroy } = require("../controllers/postControllers");//Importa controller di post
 //Crud:
 //Index (Tutti i post)
-router.get('/', index);
+router.get('/posts', index);
 
 //Show (Mostra solo un post)
-router.get('/:id', show);
+router.get('/posts/:id', show);
 
 //Create (Creazione nuovo post)
-router.post('/', store);
+router.post('/posts', store);
 
 //Update (Aggiornamento intero post)
-router.put('/:id', update);
+router.put('/posts/:id', update);
 
 //Modify (Aggiornamento parziale del post)
-router.patch('/:id', modify);
+router.patch('/posts/:id', modify);
 
 //Destroy (Eliminazione post)
-router.delete('/:id', destroy);
+router.delete('/posts/:id', destroy);
 
 module.exports = router;

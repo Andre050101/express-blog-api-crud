@@ -7,7 +7,7 @@ function index(req, res) {
         ris = posts.filter(post => post.tag.includes(tag.toLowerCase()));
     }
     res.json(ris);
-};
+}
 
 function show(req, res) {
     const id = parseInt(req.params.id);
@@ -20,7 +20,7 @@ function show(req, res) {
             message: "Post non trovato"
         });
     }
-};
+}
 // destroy
 function store(req, res) {
     res.send("Creazione di un nuovo post");
