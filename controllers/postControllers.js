@@ -11,13 +11,14 @@ function index(req, res) {
 
 function show(req, res) {
     const id = parseInt(req.params.id);
-    if (id >= 0 && id < posts.length) {
-        res.json(posts[id]);
+    const post = post.find(p => p.id === id);
+    if (post) {
+        res.json(post)
     }
     else {
         res.status(404).json({
-            message: 'Post non trovato'
-        })
+            message: "Post non trovato"
+        });
     }
 };
 // destroy
