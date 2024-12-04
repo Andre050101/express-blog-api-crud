@@ -2,9 +2,13 @@ const express = require('express'); //Richiamo express
 const path = require('path');//Richiamo path per versatilità percorsi su diversi sistemi operativi
 const posts = require('./models/post');
 const postsRouter = require('./routers/posts');//Importa router con operazioni per post
+const commentsRouter = require('./routers/comments');
 
 const app = express(); //Variabile che contene express
 const port = process.env.PORT; //porta sulla quale si posiziona il server
+
+// Middleware per parse del body
+app.use(express.json());
 
 //Serviamo asset statici di cartella public
 app.use(express.static(path.join(__dirname, 'public')));
@@ -47,6 +51,9 @@ app.get('/bacheca', (req, res, next) => {
 
 //Registrazione router per post
 app.use('/posts', postsRouter);
+
+//Registrazione router per commenti
+app.use('/comments', commentsRouter);
 
 //Gestione rotte inesistenti
 app.use((req, res, next) => {
