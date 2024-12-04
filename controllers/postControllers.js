@@ -1,7 +1,12 @@
 const posts = require("../models/post");//Importa array post
 
 function index(req, res) {
-    res.json(posts);
+    const { tag } = req.query; //Estrae tag da query string
+    const ris = posts;
+    if (tag) {
+        ris = posts.filter(post => post.tag.includes(tag.toLowerCase()));
+    }
+    res.json(ris);
 };
 
 function show(req, res) {
