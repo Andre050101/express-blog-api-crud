@@ -11,7 +11,7 @@ function index(req, res) {
 
 function show(req, res) {
     const id = parseInt(req.params.id);
-    const post = post.find(p => p.id === id);
+    const post = posts.find(p => p.id === id);
     if (post) {
         res.json(post)
     }
@@ -52,9 +52,11 @@ function modify(req, res) {
 
 function destroy(req, res) {
     const id = parseInt(req.params.id);
-    if (id >= 0 && id < posts.length) {
-        const deletedPost = posts.splice(id, 1);
-        res.send(`Cancellazione del post con ID:${id}`);
+    const index = posts.findIndex(post => post.id === id);
+    if (index !== -1) {
+        const deletedPost = posts.splice(index, 1);
+        console.log("lista aggiornata dei post:", posts);
+        res.status(204).send();
     }
     else {
         res.status(404).json({
