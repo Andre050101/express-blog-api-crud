@@ -1,69 +1,23 @@
 const express = require('express');
 const router = express.Router(); //Creazione router
-const posts = require('../data/post'); //Importo array di post da path specificato
-
+const { index, show, store, update, modify, destroy } = require("../controllers/postControllers");//Importa controller di post
 //Crud:
 //Index (Tutti i post)
-router.get('/', (req, res) => {
-    res.json(posts);
-});
+router.get('/', index);
 
 //Show (Mostra solo un post)
-router.get('/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    if (id >= 0 && id < posts.length) {
-        res.json(posts[id]);
-    }
-    else {
-        res.status(404).json({
-            message: 'Post non trovato'
-        })
-    }
-});
+router.get('/:id', show);
 
 //Create (Creazione nuovo post)
-router.post('/', (req, res) => {
-    res.send("Creazione di un nuovo post");
-});
+router.post('/', store);
 
 //Update (Aggiornamento intero post)
-router.put('/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    if (id >= 0 && id < posts.length) {
-        res.send(`Modifica totale del post con ID:${id}`);
-    }
-    else {
-        res.status(404).json({
-            message: 'Post non trovato'
-        })
-    }
-});
+router.put('/:id', update);
 
 //Modify (Aggiornamento parziale del post)
-router.patch('/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    if (id >= 0 && id < posts.length) {
-        res.send(`Modifica parziale del post con ID:${id}`);
-    }
-    else {
-        res.status(404).json({
-            message: 'Post non trovato'
-        })
-    }
-});
+router.patch('/:id', modify);
 
 //Destroy (Eliminazione post)
-router.delete('/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    if (id >= 0 && id < posts.length) {
-        const deletedPost = posts.splice(id, 1);
-        res.send(`Cancellazione del post con ID:${id}`);
-    }
-    else {
-        res.status(404).json({
-            message: 'Post non trovato'
-        })
-    }
-});
+router.delete('/:id', destroy);
 
 module.exports = router;

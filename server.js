@@ -1,6 +1,6 @@
 const express = require('express'); //Richiamo express
 const path = require('path');//Richiamo path per versatilità percorsi su diversi sistemi operativi
-const posts = require('./data/post');
+const posts = require('./models/post');
 const postsRouter = require('./routers/posts');//Importa router con operazioni per post
 
 const app = express(); //Variabile che contene express
