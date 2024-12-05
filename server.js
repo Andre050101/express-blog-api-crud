@@ -6,7 +6,7 @@ const postsRouter = require('./routers/posts');//Importa router con operazioni p
 const commentsRouter = require('./routers/comments');
 
 const app = express(); //Variabile che contene express
-const port = process.env.PORT; //porta sulla quale si posiziona il server
+const port = process.env.PORT || 3000; //porta sulla quale si posiziona il server
 
 // Middleware per parse del body
 app.use(bodyParser.json());
