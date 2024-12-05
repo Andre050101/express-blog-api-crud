@@ -1,4 +1,5 @@
 const express = require('express'); //Richiamo express
+const bodyParser = require('body-parser');
 const path = require('path');//Richiamo path per versatilità percorsi su diversi sistemi operativi
 const posts = require('./models/post');
 const postsRouter = require('./routers/posts');//Importa router con operazioni per post
@@ -8,7 +9,7 @@ const app = express(); //Variabile che contene express
 const port = process.env.PORT; //porta sulla quale si posiziona il server
 
 // Middleware per parse del body
-app.use(express.json());
+app.use(bodyParser.json());
 
 //Serviamo asset statici di cartella public
 app.use(express.static(path.join(__dirname, 'public')));

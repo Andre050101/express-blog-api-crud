@@ -24,6 +24,7 @@ function show(req, res) {
 // destroy
 function store(req, res) {
     const { titolo, contenuto, tag, image } = req.body;
+    console.log("Dati ricevuti dal client:", req.body);
     if (!titolo || !contenuto) {
         return res.status(400).json({
             error: 'titolo e contenuto obbligatori'
