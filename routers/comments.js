@@ -7,18 +7,18 @@ const { index, show, store, update, modify, destroy } = require("../controllers/
 router.get('/:postId', index);
 
 // Show
-router.get('/comment/:commentId', show);
+router.get('/:postId/comment/:commentId', show);
 
 // Store
-router.post('/', store);
+router.post('/:postId', store);
 
 // Update
-router.put('/comment/:commentId', update);
+router.put('/:postId/comment/:commentId', update);
 
 // Modify
-router.patch('/comment/:commentId', modify);
+router.patch('/:postId/comment/:commentId', modify);
 
 // Delete
-router.delete('/comment/:commentId', destroy);
+router.delete('/:postId/comment/:commentId', destroy);
 
 module.exports = router;

@@ -71,3 +71,5 @@ const comments = [
         data: new Date()
     }
 ];
+
+module.exports = comments;
