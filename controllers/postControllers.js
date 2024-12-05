@@ -23,7 +23,21 @@ function show(req, res) {
 }
 // destroy
 function store(req, res) {
-    res.send("Creazione di un nuovo post");
+    const { titolo, contenuto, tag, image } = req.body;
+    if (!titolo || !contenuto) {
+        return res.status(400).json({
+            error: 'titolo e contenuto obbligatori'
+        });
+    }
+    const newPost = {
+        id: posts.length + 1,
+        titolo,
+        contenuto,
+        image: image || null,
+        tag
+    }
+    posts.push(newPost);
+    res.status(201).json(newPost);
 }
 
 function update(req, res) {
