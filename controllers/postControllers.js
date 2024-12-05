@@ -44,14 +44,31 @@ function store(req, res) {
 
 function update(req, res) {
     const id = parseInt(req.params.id);
-    if (id >= 0 && id < posts.length) {
-        res.send(`Modifica totale del post con ID:${id}`);
+    const { titolo, contenuto, tag, image } = req.body;
+    if (isNaN(id)) {
+        return res.status(400).json({
+            error: 'ID non valido'
+        });
     }
-    else {
-        res.status(404).json({
-            message: 'Post non trovato'
-        })
+    const post = posts.find(p => p.id === id);
+    if (!post) {
+        return res.status(404).json({
+            error: "Post non trovato"
+        });
     }
+    if (titolo) {
+        post.titolo = titolo;
+    }
+    if (contenuto) {
+        post.contenuto = contenuto;
+    }
+    if (tag) {
+        post.tags = tag;
+    }
+    if (image) {
+        post.image = image;
+    }
+    res.status(200).json(post);
 };
 
 function modify(req, res) {
