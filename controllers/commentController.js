@@ -1,4 +1,5 @@
 const comments = require("../models/comment");
+const posts = require("../models/post");
 
 function index(req, res) {
     const postId = parseInt(req.params.postId);
@@ -39,39 +40,67 @@ function store(req, res) {
     res.status(201).json(newComment);
 }
 function update(req, res) {
-    const id = parseInt(req.params.id);
-    const postId = paresInt(req.params.postId);
-    if (id >= 0 && id < comments.length) {
-        res.send(`Modifica totale del commento con ID:${id} appartenente al post con id:${postId}`);
-    }
-    else {
-        res.status(404).json({
+    const postId = parseInt(req.params.postId);
+    const commentId = parseInt(req.params.commentId);
+    const post = posts.find(p => p.id === postId);
+    if (!post) {
+        return res.status(404).json({
             message: 'Post non trovato'
-        })
+        });
     }
+    const comment = comments.find(c => c.id === commentId && c.postId === postId);
+    if (!comment) {
+        return res.status(404).json({
+            message: 'Commento non trovato'
+        });
+    }
+    const { contenuto, autore } = req.body;
+    if (contenuto) {
+        comment.contenuto = contenuto;
+    }
+    if (autore) {
+        comment.autore = autore;
+    }
+    res.json(comment);
 }
 function modify(req, res) {
-    const id = parseInt(req.params.id);
-    const postId = paresInt(req.params.postId);
-    if (id >= 0 && id < comments.length) {
-        res.send(`Modifica parziale del commento con ID:${id} appartenente al post con id:${postId}`);
-    }
-    else {
-        res.status(404).json({
+    const postId = parseInt(req.params.postId);
+    const commentId = parseInt(req.params.commentId);
+    const post = posts.find(p => p.id === postId);
+    if (!post) {
+        return res.status(404).json({
             message: 'Post non trovato'
-        })
+        });
     }
+    const comment = comments.find(c => c.id === commentId && c.postId === postId);
+
+    if (!comment) {
+        return res.status(404).json({
+            message: 'Commento non trovato'
+        });
+    }
+    const { contenuto, autore } = req.body;
+    if (contenuto) {
+        comment.contenuto = contenuto;
+    }
+    if (autore) {
+        comment.autore = autore;
+    }
+    res.json(comment);
 }
 
 function destroy(req, res) {
-    const commentId = parseInt(req.params.commentId);
-    const index = comments.findIndex(c => c.id === commentId);
-
+    const { postId, commentId } = req.params;  // Recupera postId e commentId dai parametri dell'URL
+    const index = comments.findIndex(c => c.id === parseInt(commentId) && c.postId === parseInt(postId));
     if (index === -1) {
-        return res.status(404).json({ message: 'Commento non trovato' });
+        return res.status(404).json({
+            message: 'Commento non trovato'
+        });
     }
     comments.splice(index, 1);
-    res.status(204).send(); // No content
+    res.status(200).json({
+        message: `Commento con ID ${commentId} eliminato con successo dal post con ID ${postId}`
+    });
 }
 
 module.exports = { index, show, store, update, modify, destroy };

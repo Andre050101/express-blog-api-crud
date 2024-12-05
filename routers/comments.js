@@ -7,10 +7,10 @@ const { index, show, store, update, modify, destroy } = require("../controllers/
 router.get('/:postId', index);
 
 // Show
-router.get('/:postId/comment/:commentId', show);
+router.get('/comment/:commentId', show);
 
 // Store
-router.post('/:postId', store);
+router.post('/', store);
 
 // Update
 router.put('/:postId/comment/:commentId', update);
