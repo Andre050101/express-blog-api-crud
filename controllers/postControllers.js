@@ -39,6 +39,7 @@ function store(req, res) {
     }
     posts.push(newPost);
     res.status(201).json(newPost);
+
 }
 
 function update(req, res) {
