@@ -4,6 +4,8 @@ const path = require('path');//Richiamo path per versatilità percorsi su divers
 const posts = require('./models/post');
 const postsRouter = require('./routers/posts');//Importa router con operazioni per post
 const commentsRouter = require('./routers/comments');
+const notfound = require('./middlewares/notFound');
+const errorHandler = require('./middlewares/errorHandler');
 
 const app = express(); //Variabile che contene express
 const port = process.env.PORT || 3000; //porta sulla quale si posiziona il server
@@ -56,13 +58,12 @@ app.use('/posts', postsRouter);
 //Registrazione router per commenti
 app.use('/comments', commentsRouter);
 
+//Middlewares
 //Gestione rotte inesistenti
-app.use((req, res, next) => {
-    res.status(404).json({
-        message: 'Risorsa non trovata'
-    });
-});
+app.use(notfound);
 
+//Gestione errori
+app.use(errorHandler);
 
 //Avvia server
 app.listen(port, () => {
