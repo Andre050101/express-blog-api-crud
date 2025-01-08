@@ -1,15 +1,19 @@
-const express = require('express'); //Richiamo express
-const bodyParser = require('body-parser');
-const path = require('path');//Richiamo path per versatilità percorsi su diversi sistemi operativi
-const posts = require('./models/post');
-const postsRouter = require('./routers/posts');//Importa router con operazioni per post
-const commentsRouter = require('./routers/comments');
-const notfound = require('./middlewares/notFound');
-const errorHandler = require('./middlewares/errorHandler');
-
+import express from 'express'; //Richiamo express
+import bodyParser from 'body-parser';
+import path from 'path';//Richiamo path per versatilità percorsi su diversi sistemi operativi
+import { fileURLToPath } from 'url';
+import posts from './models/post.js';
+import postsRouter from './routers/posts.js';//Importa router con operazioni per post
+import notFound from './middlewares/notFound.js';
+import errorHandler from './middlewares/errorHandler.js';
+import cors from 'cors';
 const app = express(); //Variabile che contene express
 const port = process.env.PORT || 3000; //porta sulla quale si posiziona il server
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
+
+app.use(cors());
 // Middleware per parse del body
 app.use(bodyParser.json());
 
@@ -55,12 +59,10 @@ app.get('/bacheca', (req, res, next) => {
 //Registrazione router per post
 app.use('/posts', postsRouter);
 
-//Registrazione router per commenti
-app.use('/comments', commentsRouter);
 
 //Middlewares
 //Gestione rotte inesistenti
-app.use(notfound);
+app.use(notFound);
 
 //Gestione errori
 app.use(errorHandler);

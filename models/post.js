@@ -38,4 +38,4 @@ const posts = [
 ];
 
 //Esportiamo array
-module.exports = posts;
+export default posts;

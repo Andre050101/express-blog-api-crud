@@ -1,4 +1,4 @@
-const posts = require("../models/post");//Importa array post
+import posts from '../models/post.js';//Importa array post
 
 function index(req, res) {
     const { tag } = req.query; //Estrae tag da query string
@@ -98,4 +98,4 @@ function destroy(req, res) {
     }
 };
 
-module.exports = { index, show, store, update, modify, destroy };
+export { index, show, store, update, modify, destroy };
