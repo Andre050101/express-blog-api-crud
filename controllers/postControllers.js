@@ -32,12 +32,13 @@ function store(req, res) {
     }
     const newPost = {
         id: posts.length + 1,
-        titolo,
-        contenuto,
+        title: titolo,
+        content: contenuto,
         image: image || null,
-        tag
+        tag: tag
     }
     posts.push(newPost);
+    console.log(posts);
     res.status(201).json(newPost);
 
 }

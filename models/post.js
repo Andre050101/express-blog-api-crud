@@ -2,37 +2,37 @@
 const posts = [
     {
         id: 0,
-        titolo: "Primo post",
-        contenuto: "Questo è il contenuto del primo post",
-        immagine: "/assets/ciambellone.jpeg",
+        title: "Primo post",
+        content: "Questo è il contenuto del primo post",
+        image: "/assets/ciambellone.jpeg",
         tags: ["dolci", "zucchero"]
     },
     {
         id: 1,
-        titolo: "Secondo post",
-        contenuto: "Questo è il contenuto del secondo post",
-        immagine: "/assets/cracker_barbabietola.jpeg",
+        title: "Secondo post",
+        content: "Questo è il contenuto del secondo post",
+        image: "/assets/cracker_barbabietola.jpeg",
         tags: ["dolci", "zucchero"]
     },
     {
         id: 2,
-        titolo: "Terzo post",
-        contenuto: "Questo è il contenuto del terzo post",
-        immagine: "/assets/pane_fritto_dolce.jpeg",
+        title: "Terzo post",
+        content: "Questo è il contenuto del terzo post",
+        image: "/assets/pane_fritto_dolce.jpeg",
         tags: ["dolci", "zucchero"]
     },
     {
         id: 3,
-        titolo: "Quarto post",
-        contenuto: "Questo è il contenuto del quarto post",
-        immagine: "/assets/pasta_barbabietola.jpeg",
+        title: "Quarto post",
+        content: "Questo è il contenuto del quarto post",
+        image: "/assets/pasta_barbabietola.jpeg",
         tags: ["dolci", "zucchero"]
     },
     {
         id: 4,
-        titolo: "Quinto post",
-        contenuto: "Questo è il contenuto del quinto post",
-        immagine: "/assets/torta_paesana.jpeg",
+        title: "Quinto post",
+        content: "Questo è il contenuto del quinto post",
+        image: "/assets/torta_paesana.jpeg",
         tags: ["dolci", "zucchero"]
     }
 ];
