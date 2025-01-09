@@ -23,22 +23,28 @@ function show(req, res) {
 }
 // destroy
 function store(req, res) {
-    const { titolo, contenuto, tag, image } = req.body;
+    const { titolo, contenuto, tag, image, author, category, status } = req.body;
     console.log("Dati ricevuti dal client:", req.body);
+
     if (!titolo || !contenuto) {
         return res.status(400).json({
-            error: 'titolo e contenuto obbligatori'
+            error: 'Titolo e contenuto obbligatori',
         });
     }
+
     const newPost = {
         id: posts.length + 1,
         title: titolo,
         content: contenuto,
         image: image || null,
-        tag: tag
-    }
+        tag: tag,
+        author: author || "Anonimo",
+        category: category || "Senza categoria",
+        status: status || "draft",
+    };
+
     posts.push(newPost);
-    console.log(posts);
+    console.log("Post aggiornati:", posts);
     res.status(201).json(newPost);
 
 }
