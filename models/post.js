@@ -7,7 +7,7 @@ const posts = [
         title: "Primo post",
         content: "Questo è il contenuto del primo post",
         image: "/assets/ciambellone.jpeg",
-        tags: ["dolci", "zucchero"]
+        category: ["dolci", "zucchero"]
     },
     {
         id: 1,
@@ -16,7 +16,7 @@ const posts = [
         status: "Published",
         content: "Questo è il contenuto del secondo post",
         image: "/assets/cracker_barbabietola.jpeg",
-        tags: ["dolci", "zucchero"]
+        category: ["dolci", "zucchero"]
     },
     {
         id: 2,
@@ -25,7 +25,7 @@ const posts = [
         status: "Draft",
         content: "Questo è il contenuto del terzo post",
         image: "/assets/pane_fritto_dolce.jpeg",
-        tags: ["dolci", "zucchero"]
+        category: ["dolci", "zucchero"]
     },
     {
         id: 3,
@@ -34,7 +34,7 @@ const posts = [
         status: "Draft",
         content: "Questo è il contenuto del quarto post",
         image: "/assets/pasta_barbabietola.jpeg",
-        tags: ["dolci", "zucchero"]
+        category: ["dolci", "zucchero"]
     },
     {
         id: 4,
@@ -43,7 +43,7 @@ const posts = [
         status: "Published",
         content: "Questo è il contenuto del quinto post",
         image: "/assets/torta_paesana.jpeg",
-        tags: ["dolci", "zucchero"]
+        category: ["dolci", "zucchero"]
     }
 ];
 

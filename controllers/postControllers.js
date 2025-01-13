@@ -1,8 +1,8 @@
-import posts from '../models/post.js';//Importa array post
+import posts from '../models/post.js'; // Importa array post
 
 function index(req, res) {
-    const { tag } = req.query; //Estrae tag da query string
-    const ris = posts;
+    const { tag } = req.query; // Estrae tag da query string
+    let ris = posts;
     if (tag) {
         ris = posts.filter(post => post.tag.includes(tag.toLowerCase()));
     }
@@ -13,31 +13,28 @@ function show(req, res) {
     const id = parseInt(req.params.id);
     const post = posts.find(p => p.id === id);
     if (post) {
-        res.json(post)
-    }
-    else {
+        res.json(post);
+    } else {
         res.status(404).json({
             message: "Post non trovato"
         });
     }
 }
-// destroy
+
 function store(req, res) {
     const { titolo, contenuto, tag, image, author, category, status } = req.body;
+
     console.log("Dati ricevuti dal client:", req.body);
 
     if (!titolo || !contenuto) {
-        return res.status(400).json({
-            error: 'Titolo e contenuto obbligatori',
-        });
+        return res.status(400).json({ error: 'Titolo e contenuto obbligatori' });
     }
 
     const newPost = {
         id: posts.length + 1,
         title: titolo,
         content: contenuto,
-        image: image || null,
-        tag: tag,
+        image: image || null, // Ora trattato come URL
         author: author || "Anonimo",
         category: category || "Senza categoria",
         status: status || "draft",
@@ -46,7 +43,6 @@ function store(req, res) {
     posts.push(newPost);
     console.log("Post aggiornati:", posts);
     res.status(201).json(newPost);
-
 }
 
 function update(req, res) {
@@ -63,18 +59,10 @@ function update(req, res) {
             error: "Post non trovato"
         });
     }
-    if (titolo) {
-        post.titolo = titolo;
-    }
-    if (contenuto) {
-        post.contenuto = contenuto;
-    }
-    if (tag) {
-        post.tags = tag;
-    }
-    if (image) {
-        post.image = image;
-    }
+    if (titolo) post.titolo = titolo;
+    if (contenuto) post.contenuto = contenuto;
+    if (image) post.image = image;
+
     res.status(200).json(post);
 };
 
@@ -82,8 +70,7 @@ function modify(req, res) {
     const id = parseInt(req.params.id);
     if (id >= 0 && id < posts.length) {
         res.send(`Modifica parziale del post con ID:${id}`);
-    }
-    else {
+    } else {
         res.status(404).json({
             message: 'Post non trovato'
         })
@@ -94,11 +81,10 @@ function destroy(req, res) {
     const id = parseInt(req.params.id);
     const index = posts.findIndex(post => post.id === id);
     if (index !== -1) {
-        const deletedPost = posts.splice(index, 1);
-        console.log("lista aggiornata dei post:", posts);
+        posts.splice(index, 1);
+        console.log("Lista aggiornata dei post:", posts);
         res.status(204).send();
-    }
-    else {
+    } else {
         res.status(404).json({
             message: 'Post non trovato'
         })
